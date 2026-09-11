@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% if noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
+<title>{{ metaTitle or (title + " | " + site.brand) }}</title>
+<meta name="description" content="{{ metaDescription or site.description }}">
+<meta name="theme-color" content="#F4F5F7">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:site_name" content="{{ site.brand }}">
+<meta property="og:title" content="{{ metaTitle or (title + ' | ' + site.brand) }}">
+<meta property="og:description" content="{{ metaDescription or site.description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/assets/img/hero.webp">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700&family=Jost:wght@300;400&family=Saira:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700&family=Jost:wght@300;400&family=Saira:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>document.documentElement.className+=" js";</script>
+</head>
+<body>
+
+<a class="skip" href="#saturs">Pāriet uz saturu</a>
+
+{% include "partials/header.njk" %}
+
+<main id="saturs">
+{{ content | safe }}
+</main>
+
+{% include "partials/footer.njk" %}
+
+{% include "partials/schema.njk" %}
+
+<script src="/assets/js/app.js" defer></script>
+<script>
+(function () {
+  var d = document, root = d.documentElement;
+  function showAll() {
+    var n = d.querySelectorAll('.reveal');
+    for (var i = 0; i < n.length; i++) n[i].classList.add('in');
+  }
+  try {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { showAll(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          entries[i].target.classList.add('in');
+          io.unobserve(entries[i].target);
+        }
+      }
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+    var els = d.querySelectorAll('.reveal');
+    for (var i = 0; i < els.length; i++) io.observe(els[i]);
+    // Failsafe: nothing on this page stays invisible, whatever happens.
+    setTimeout(showAll, 3000);
+  } catch (e) {
+    root.classList.remove('js');
+    showAll();
+  }
+})();
+</script>
+
+</body>
+</html>

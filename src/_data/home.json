@@ -1,0 +1,55 @@
+{
+  "hero_title_line1": "Ražojam un uzstādām",
+  "hero_title_line2": "vārtus kopš 1992. gada",
+  "hero_text": "Paceļamie un sekciju vārti, bīdāmie vārti, industriālie vārti, automātika un durvis. Ražojam Nītaurē, strādājam Cēsīs, Valmierā, Siguldā, Rīgā un visā Vidzemē.",
+  "hero_cta": "Nosūtīt pieteikumu",
+  "hero_image": "/assets/img/hero.webp",
+  "hero_image_alt": "Sekciju vārti ar personāla durvīm uz tumši apšūtas ēkas",
+  "types_title": "Vārtu veidi",
+  "types_text": "Izvēlieties savu gadījumu. Pie katra veida ir poga, kas pieteikuma formā ieraksta vārtu veidu, lai atliek norādīt tikai ailes izmēru.",
+  "komp_title": "Komplektācija",
+  "komp_text": "Paceļamos vārtus komplektējam pēc vajadzības. To, kas jums vajadzīgs, varat atzīmēt pieteikumā.",
+  "komp_image": "/assets/img/komplektacija.webp",
+  "komp_image_alt": "Divi sekciju vārti ar logu rindām uz saimniecības ēkas",
+  "komp_items": [
+    "Logi",
+    "Personāla durtiņas",
+    "Automātika",
+    "Manuālais ķēdes reduktors",
+    "Stiprības ribas",
+    "Dubultās eņģes",
+    "Garie rullīši",
+    "Dažāda veida atslēgas"
+  ],
+  "komp_ral": "Krāsu toņi pēc RAL krāsu kataloga.",
+  "facts": [
+    {
+      "value": "1992",
+      "unit": "",
+      "label": "Uzņēmums dibināts un reģistrēts Komercreģistrā",
+      "count": false
+    },
+    {
+      "value": "26",
+      "unit": "",
+      "label": "Pilsētas, kurās sniedzam pakalpojumu",
+      "count": true
+    },
+    {
+      "value": "176",
+      "unit": "",
+      "label": "Pagasti papildus pilsētām",
+      "count": true
+    },
+    {
+      "value": "2",
+      "unit": "gadi",
+      "label": "Garantija paceļamajiem vārtiem",
+      "count": true
+    }
+  ],
+  "gallery_title": "Darbu galerija",
+  "gallery_text": "Mūsu izgatavotie un uzstādītie vārti un durvis.",
+  "form_title": "Pieteikums",
+  "form_text": "Norādiet vārtu veidu un aptuveno ailes izmēru. Ar to pietiek, lai sagatavotu piedāvājumu."
+}

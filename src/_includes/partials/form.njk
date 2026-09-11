@@ -1,0 +1,83 @@
+<div class="ask__form">
+  <h2 class="s-h reveal" id="ask-h">{{ home.form_title }}</h2>
+  <p class="s-p reveal" style="--d:60ms">{{ home.form_text }}</p>
+
+  <p class="sr-only" id="frm-status" aria-live="polite" aria-atomic="true"></p>
+
+  <form class="frm reveal" id="frm" novalidate style="--d:120ms">
+    <div class="fld">
+      <label for="f-veids">Vārtu veids</label>
+      <select id="f-veids" name="veids">
+        <option value="">Izvēlieties veidu</option>
+        {% for g in collections.gates %}
+        <option>{{ g.data.title }}</option>
+        {% endfor %}
+        <option>Vēl nezinu</option>
+      </select>
+    </div>
+
+    <fieldset class="fld fld--size">
+      <legend>Ailes izmērs, mm</legend>
+      <div class="size">
+        <div class="size__f">
+          <label for="f-w">Platums</label>
+          <input id="f-w" name="platums" type="number" inputmode="numeric" min="500" max="12000" step="10" autocomplete="off" placeholder="3000">
+        </div>
+        <span class="size__x" aria-hidden="true">&times;</span>
+        <div class="size__f">
+          <label for="f-h">Augstums</label>
+          <input id="f-h" name="augstums" type="number" inputmode="numeric" min="500" max="8000" step="10" autocomplete="off" placeholder="2400">
+        </div>
+      </div>
+      <p class="hint">Nav precīzi zināms? Ierakstiet aptuveni, precizēsim uz vietas.</p>
+    </fieldset>
+
+    <p class="summary" id="summary" aria-live="polite">Pieteikums: veids nav izvēlēts</p>
+
+    <div class="frm__row">
+      <div class="fld">
+        <label for="f-name">Vārds <span aria-hidden="true">*</span></label>
+        <input id="f-name" name="vards" type="text" autocomplete="name" required aria-describedby="e-name">
+        <p class="err" id="e-name" hidden>Ierakstiet savu vārdu.</p>
+      </div>
+      <div class="fld">
+        <label for="f-tel">Tālrunis <span aria-hidden="true">*</span></label>
+        <input id="f-tel" name="talrunis" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="e-tel">
+        <p class="err" id="e-tel" hidden>Ierakstiet tālruņa numuru, uz kuru varam atzvanīt.</p>
+      </div>
+    </div>
+
+    <div class="fld">
+      <label for="f-mail">E-pasts</label>
+      <input id="f-mail" name="epasts" type="email" inputmode="email" autocomplete="email" spellcheck="false" aria-describedby="h-mail e-mail">
+      <p class="hint" id="h-mail">Neobligāti. Uz e-pastu varam nosūtīt piedāvājumu rakstiski.</p>
+      <p class="err" id="e-mail" hidden>Šķiet, e-pasta adresē ir kļūda.</p>
+    </div>
+
+    <div class="fld">
+      <label for="f-msg">Piezīmes</label>
+      <textarea id="f-msg" name="piezimes" rows="4" autocomplete="off"></textarea>
+    </div>
+
+    <div class="fld fld--check">
+      <input id="f-gdpr" name="gdpr" type="checkbox" required aria-describedby="e-gdpr">
+      <label for="f-gdpr">Piekrītu, ka mani dati tiek izmantoti atbildes sniegšanai. <a class="lnk lnk--inline" href="/privatuma-politika/">Privātuma politika</a></label>
+      <p class="err" id="e-gdpr" hidden>Lai nosūtītu pieteikumu, nepieciešama piekrišana.</p>
+    </div>
+
+    <div class="frm__end">
+      <button class="btn btn--hi btn--lg" type="submit">Nosūtīt pieteikumu<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></button>
+      <p class="frm__note">Steidzami? <a class="lnk" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a></p>
+    </div>
+  </form>
+
+  <div class="done" id="done" hidden role="status">
+    <p class="done__t">Paldies, pieteikums aizpildīts pareizi.</p>
+    <p class="done__p" id="done-copy">Nosūtīšanas savienojums vēl nav pieslēgts. Kamēr tas notiek, zvaniet vai rakstiet tieši &ndash; atbildam tajā pašā dienā.</p>
+    <p class="done__links">
+      <a class="lnk" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>
+      <a class="lnk" href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </p>
+    <button class="btn btn--gh btn--sm" type="button" id="again">Aizpildīt no jauna</button>
+  </div>
+</div>

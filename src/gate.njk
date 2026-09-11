@@ -1,0 +1,82 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.gates
+  size: 1
+  alias: gate
+  addAllPagesToCollections: true
+permalink: "/{{ gate.data.slug }}/"
+eleventyComputed:
+  title: "{{ gate.data.title }}"
+  metaTitle: "{{ gate.data.meta_title }}"
+  metaDescription: "{{ gate.data.meta_description }}"
+  breadcrumb: true
+  gateType: "{{ gate.data.title }}"
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ gate.data.title }}</span>
+    </nav>
+    <h1 class="phero__h">{{ gate.data.title }}</h1>
+    <p class="phero__p">{{ gate.data.summary }}</p>
+    <div class="phero__cta">
+      <a class="btn btn--hi btn--lg" href="#pieteikums" data-veids="{{ gate.data.title }}">Pieteikums šim veidam<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a>
+      <a class="btn btn--gh btn--lg btn--tel" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="pbody">
+  <div class="wrap pbody__in">
+    <div class="pbody__txt reveal">
+      {{ gate.templateContent | safe }}
+      {% if gate.data.keywords %}
+      <ul class="tile__k pbody__k">
+        {% for k in gate.data.keywords %}<li>{{ k.word or k }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <figure class="pbody__fig reveal" style="--d:80ms">
+      {% if gate.data.image %}
+      <img src="{{ gate.data.image }}" width="{{ gate.data.image | imgW }}" height="{{ gate.data.image | imgH }}" alt="{{ gate.data.image_alt }}" loading="lazy" decoding="async">
+      {% else %}
+      <div class="ph" role="img" aria-label="Foto vēl nav pievienots">
+        <svg class="ph__i" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <rect x="5" y="11" width="38" height="26" rx="2"/>
+          <path d="M5 30l10-9 8 7 7-6 13 11"/>
+          <circle cx="16" cy="19" r="3"/>
+        </svg>
+        <p class="ph__t">Šī veida foto drīz būs</p>
+        <p class="ph__d">Pagaidām zvaniet vai piesakiet izsaukumu &ndash; atbraucam apskatīt un pasakām, kas der.</p>
+      </div>
+      {% endif %}
+    </figure>
+  </div>
+</section>
+
+<section class="pcross" aria-labelledby="pcross-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="pcross-h">Citi vārtu veidi</h2>
+    <div class="pcross__grid">
+      {% for g in collections.gates %}{% if g.data.slug != gate.data.slug %}
+      <a class="pcross__c reveal" href="/{{ g.data.slug }}/" style="--d:{{ loop.index0 * 50 }}ms">
+        <span class="pcross__t">{{ g.data.title }}</span>
+        <span class="pcross__d">{{ g.data.summary }}</span>
+        <span class="pcross__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ask" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>

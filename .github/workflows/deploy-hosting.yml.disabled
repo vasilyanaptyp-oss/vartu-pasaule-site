@@ -1,0 +1,62 @@
+# ============================================================================
+# Izlikšana uz klienta hostinga (185.151.30.174, Apache).
+#
+# Šis fails PAGAIDĀM IR IZSLĒGTS: tā nosaukums beidzas ar .disabled, tāpēc
+# GitHub to neizpilda. Kad Andris iedos FTP vai SSH piekļuvi:
+#
+#   1. Repozitorija Settings > Secrets and variables > Actions
+#      pievieno noslēpumus:
+#        FTP_SERVER    piem. vartupasaule.lv  vai  185.151.30.174
+#        FTP_USERNAME  hostinga lietotājvārds
+#        FTP_PASSWORD  hostinga parole
+#        FTP_DIR       mape uz servera, piem. /public_html/
+#   2. Pārsauc šo failu par deploy-hosting.yml (noņem .disabled).
+#   3. Gatavs. Katrs satura labojums pats aizies uz serveri.
+#
+# Uz servera nonāk TIKAI statiski faili: HTML, CSS, JS, attēli, .htaccess.
+# Nekāda PHP, nekādas datubāzes.
+# ============================================================================
+
+name: Izlikt uz hostinga
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      # Klienta serveris raida no saknes, tāpēc bez prefiksa.
+      - run: npm run build
+
+      - name: Pārbaudīt būvējumu
+        run: |
+          test -f _site/index.html
+          test -f _site/kontakti/index.html
+
+      - name: Augšupielādēt uz Apache serveri
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Ja hostings atbalsta FTPS, tas ir drošāk par parasto FTP:
+          protocol: ftps
+          port: 21
+          local-dir: ./_site/
+          server-dir: ${{ secrets.FTP_DIR }}
+          # Neaiztiek failus, ko esam ielikuši uz servera ar roku:
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**

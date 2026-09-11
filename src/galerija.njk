@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+title: Darbu galerija
+metaTitle: "Darbu galerija - uzstādītie vārti un durvis | Vārtu pasaule"
+metaDescription: "Vārtu pasaules izgatavotie un uzstādītie paceļamie, sekciju, divviru un industriālie vārti, kā arī metāla durvis Vidzemē un visā Latvijā."
+permalink: /galerija/
+breadcrumb: true
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Darbu galerija</span>
+    </nav>
+    <h1 class="phero__h">Darbu galerija</h1>
+    <p class="phero__p">Mūsu izgatavotie un uzstādītie vārti un durvis. Katrs objekts ir mērīts un izgatavots pēc ailes.</p>
+  </div>
+</section>
+
+<section class="gal gal--page">
+  <div class="wrap">
+    <ul class="gal__grid gal__grid--all">
+      {% for g in collections.gallery %}
+      <li class="reveal" style="--d:{{ loop.index0 % 6 * 40 }}ms"><img src="{{ g.data.image }}" width="{{ g.data.image | imgW }}" height="{{ g.data.image | imgH }}" alt="{{ g.data.alt }}" loading="lazy" decoding="async"></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="ask" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>

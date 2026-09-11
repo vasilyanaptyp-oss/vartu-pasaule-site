@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Lapa nav atrasta
+metaTitle: "Lapa nav atrasta | Vārtu pasaule"
+permalink: /404.html
+noindex: true
+---
+
+<section class="phero phero--404">
+  <div class="wrap">
+    <p class="e404">404</p>
+    <h1 class="phero__h">Šāda lapa neeksistē</h1>
+    <p class="phero__p">Iespējams, adrese ierakstīta ar kļūdu vai lapa ir pārvietota. Zemāk ir viss, kas mums ir.</p>
+    <div class="phero__cta">
+      <a class="btn btn--hi btn--lg" href="/">Uz sākumu<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a>
+      <a class="btn btn--gh btn--lg btn--tel" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="pcross" aria-labelledby="pcross-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="pcross-h">Vārtu veidi</h2>
+    <div class="pcross__grid">
+      {% for g in collections.gates %}
+      <a class="pcross__c reveal" href="/{{ g.data.slug }}/" style="--d:{{ loop.index0 * 50 }}ms">
+        <span class="pcross__t">{{ g.data.title }}</span>
+        <span class="pcross__d">{{ g.data.summary }}</span>
+        <span class="pcross__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

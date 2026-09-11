@@ -1,0 +1,54 @@
+{
+  "brand": "Vārtu pasaule",
+  "legal_name": "SIA „Elks AK“",
+  "tagline": "Labi vārti: drošība sev un tuvajiem",
+  "founded_year": "1992",
+  "founded_date": "1992-09-29",
+  "founded_date_lv": "29.09.1992",
+  "reg_nr": "49502002122",
+  "pvn_nr": "LV49502002122",
+  "url": "https://vartupasaule.lv",
+  "description": "Paceļamo, bīdāmo vārtu un durvju ražošana, uzstādīšana un serviss. Vārti privātmājām un industriālas nozīmes objektiem. Strādājam kopš 1992. gada.",
+  "address": {
+    "street": "„Pīlēns“, Nītaure",
+    "parish": "Nītaures pagasts",
+    "region": "Cēsu novads",
+    "postal_code": "LV-4112",
+    "country": "Latvija",
+    "full": "„Pīlēns“, Nītaure, Nītaures pag., Cēsu nov., LV-4112"
+  },
+  "phones": [
+    { "label": "Galvenais tālrunis", "number": "+371 29146306", "tel": "+37129146306" },
+    { "label": "Otrs tālrunis", "number": "+371 26121600", "tel": "+37126121600" },
+    { "label": "Trešais tālrunis", "number": "+371 29144883", "tel": "+37129144883" }
+  ],
+  "email": "vartupasaule@gmail.com",
+  "hours": [
+    { "day": "Pirmdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Otrdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Trešdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Ceturtdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Piektdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Sestdiena", "open": "8:00", "close": "20:00" },
+    { "day": "Svētdiena", "open": "9:00", "close": "19:00" }
+  ],
+  "geo_headline": "Kur strādājam",
+  "geo_intro": "Vārtu uzstādīšana, serviss, apkope un remonts visā Vidzemē, kā arī citviet Latvijā.",
+  "geo_core": [
+    "Cēsis", "Valmiera", "Limbaži", "Ērgļi", "Piebalga",
+    "Madona", "Sigulda", "Rīga", "visa Vidzeme"
+  ],
+  "geo_wider": ["Ventspils", "Jelgava", "Jēkabpils", "Rēzekne", "Valka"],
+  "geo_counts": {
+    "cities": 26,
+    "parishes": 176,
+    "note": "Pakalpojumu sniedzam 26 pilsētās un vēl 176 pagastos."
+  },
+  "catalog_profiles": [
+    "https://www.zl.lv/lv/uznemums/elks-ak-sia/",
+    "https://infolapa.zl.lv/elks-ak-sia/",
+    "https://www.1188.lv/katalogs/zogi-varti-6300/vartu-pasaule-sia-elks-ak-459099",
+    "https://abc.lv/infolapa/elks-ak-sia",
+    "https://cesis.pilseta24.lv/katalogs/info/elks-ak-sia"
+  ]
+}

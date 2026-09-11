@@ -1,0 +1,207 @@
+# ============================================================================
+# Vārtu pasaule - satura redaktora konfigurācija (Sveltia CMS)
+#
+# backend.repo      - klienta GitHub konts un repozitorijs
+# backend.base_url  - Cloudflare Worker adrese, kas veic pieslēgšanos ar
+#                     GitHub lietotājvārdu un paroli. Bezmaksas plāns.
+#                     Ja šī rinda ir izņemta, pieslēgties var ar piekļuves
+#                     atslēgu (Sign in with Token).
+# ============================================================================
+
+backend:
+  name: github
+  repo: OWNER/vartu-pasaule-site
+  branch: main
+  base_url: https://vartu-pasaule-auth.OWNER.workers.dev
+  commit_messages:
+    create: 'Pievienots {{collection}} "{{slug}}"'
+    update: 'Labots {{collection}} "{{slug}}"'
+    delete: 'Dzēsts {{collection}} "{{slug}}"'
+    uploadMedia: 'Augšupielādēts attēls "{{path}}"'
+    deleteMedia: 'Dzēsts attēls "{{path}}"'
+
+media_folder: src/assets/img
+public_folder: /assets/img
+
+publish_mode: simple
+site_url: https://vartupasaule.lv
+display_url: https://vartupasaule.lv
+logo_url: /assets/img/logo-mark.png
+
+collections:
+  # --------------------------------------------------------------------------
+  - name: settings
+    label: Uzņēmuma dati
+    label_singular: Uzņēmuma dati
+    description: Kontakti, darba laiks, adrese un pilsētas. Šie dati parādās visās lapās.
+    icon: business
+    files:
+      - name: site
+        label: Kontakti un pamatdati
+        file: src/_data/site.json
+        fields:
+          - { name: brand, label: Zīmols, widget: string }
+          - { name: legal_name, label: Uzņēmuma nosaukums, widget: string }
+          - { name: tagline, label: Sauklis, widget: string }
+          - { name: founded_year, label: Dibināšanas gads, widget: string }
+          - { name: founded_date, label: "Dibināšanas datums (GGGG-MM-DD, tehnisks)", widget: string }
+          - { name: founded_date_lv, label: "Dibināšanas datums (kā rāda lapā)", widget: string }
+          - { name: reg_nr, label: Reģistrācijas numurs, widget: string }
+          - { name: pvn_nr, label: PVN numurs, widget: string }
+          - { name: url, label: Mājaslapas adrese, widget: string }
+          - { name: description, label: Uzņēmuma apraksts (meklētājiem), widget: text }
+          - { name: email, label: E-pasts, widget: string }
+          - name: address
+            label: Adrese
+            widget: object
+            fields:
+              - { name: street, label: Iela un māja, widget: string }
+              - { name: parish, label: Pagasts, widget: string }
+              - { name: region, label: Novads, widget: string }
+              - { name: postal_code, label: Pasta indekss, widget: string }
+              - { name: country, label: Valsts, widget: string }
+              - { name: full, label: Pilna adrese vienā rindā, widget: string }
+          - name: phones
+            label: Tālruņi
+            label_singular: Tālrunis
+            widget: list
+            summary: '{{fields.number}}'
+            fields:
+              - { name: label, label: Apraksts, widget: string }
+              - { name: number, label: "Numurs (piem. +371 29146306)", widget: string }
+              - { name: tel, label: "Numurs bez atstarpēm (piem. +37129146306)", widget: string }
+          - name: hours
+            label: Darba laiks
+            label_singular: Diena
+            widget: list
+            summary: '{{fields.day}}: {{fields.open}} - {{fields.close}}'
+            fields:
+              - { name: day, label: Diena, widget: string }
+              - { name: open, label: No, widget: string }
+              - { name: close, label: Līdz, widget: string }
+          - { name: geo_headline, label: "Ģeogrāfija: virsraksts", widget: string }
+          - { name: geo_intro, label: "Ģeogrāfija: ievads", widget: text }
+          - name: geo_core
+            label: Galvenās pilsētas (izceltas)
+            label_singular: Pilsēta
+            widget: list
+            field: { name: name, label: Nosaukums, widget: string }
+          - name: geo_wider
+            label: Pārējās pilsētas
+            label_singular: Pilsēta
+            widget: list
+            field: { name: name, label: Nosaukums, widget: string }
+          - name: geo_counts
+            label: Pilsētu un pagastu skaits
+            widget: object
+            fields:
+              - { name: cities, label: Pilsētu skaits, widget: number, value_type: int }
+              - { name: parishes, label: Pagastu skaits, widget: number, value_type: int }
+              - { name: note, label: Teikums zem saraksta, widget: string }
+          - name: catalog_profiles
+            label: Profili katalogos
+            label_singular: Saite
+            widget: list
+            required: false
+            field: { name: url, label: Adrese, widget: string }
+
+  # --------------------------------------------------------------------------
+  - name: pages
+    label: Lapu teksti
+    description: Sākumlapas un "Par mums" lapas teksti.
+    icon: article
+    files:
+      - name: home
+        label: Sākumlapa
+        file: src/_data/home.json
+        fields:
+          - { name: hero_title_line1, label: "Galvenais virsraksts, 1. rinda", widget: string }
+          - { name: hero_title_line2, label: "Galvenais virsraksts, 2. rinda", widget: string }
+          - { name: hero_text, label: Teksts zem virsraksta, widget: text }
+          - { name: hero_cta, label: Pogas teksts, widget: string }
+          - { name: hero_image, label: Galvenā bilde, widget: image }
+          - { name: hero_image_alt, label: "Galvenās bildes apraksts (neredzamajiem)", widget: string }
+          - { name: types_title, label: "Vārtu veidi: virsraksts", widget: string }
+          - { name: types_text, label: "Vārtu veidi: teksts", widget: text }
+          - { name: komp_title, label: "Komplektācija: virsraksts", widget: string }
+          - { name: komp_text, label: "Komplektācija: teksts", widget: text }
+          - { name: komp_image, label: "Komplektācija: bilde", widget: image }
+          - { name: komp_image_alt, label: "Komplektācijas bildes apraksts", widget: string }
+          - name: komp_items
+            label: Komplektācijas saraksts
+            label_singular: Pozīcija
+            widget: list
+            field: { name: item, label: Nosaukums, widget: string }
+          - { name: komp_ral, label: Piezīme par krāsām, widget: string }
+          - name: facts
+            label: Skaitļi joslā
+            label_singular: Skaitlis
+            widget: list
+            summary: '{{fields.value}} {{fields.unit}} - {{fields.label}}'
+            fields:
+              - { name: value, label: Skaitlis, widget: string }
+              - { name: unit, label: "Mērvienība (var atstāt tukšu)", widget: string, required: false }
+              - { name: label, label: Paskaidrojums, widget: string }
+              - { name: count, label: "Skaitīt uz augšu (gadam atstāt izslēgtu)", widget: boolean, default: true }
+          - { name: gallery_title, label: "Galerija: virsraksts", widget: string }
+          - { name: gallery_text, label: "Galerija: teksts", widget: text }
+          - { name: form_title, label: "Pieteikums: virsraksts", widget: string }
+          - { name: form_text, label: "Pieteikums: teksts", widget: text }
+
+      - name: about
+        label: Par mums
+        file: src/_data/about.json
+        fields:
+          - { name: title, label: Virsraksts, widget: string }
+          - { name: intro, label: Ievads, widget: text }
+          - { name: image, label: Bilde, widget: image }
+          - { name: image_alt, label: "Bildes apraksts (neredzamajiem)", widget: string }
+          - name: paragraphs
+            label: Rindkopas
+            label_singular: Rindkopa
+            widget: list
+            field: { name: text, label: Teksts, widget: text }
+
+  # --------------------------------------------------------------------------
+  - name: gates
+    label: Vārtu veidi
+    label_singular: Vārtu veids
+    description: Katrs veids ir atsevišķa lapa ar savu pieteikuma pogu.
+    icon: garage_home
+    folder: src/content/gates
+    create: true
+    slug: '{{order}}-{{slug}}'
+    sortable_fields: [order, title]
+    summary: '{{order}}. {{title}}'
+    fields:
+      - { name: title, label: Nosaukums, widget: string }
+      - { name: slug, label: "Adrese lapā (tikai mazie burti bez garumzīmēm, piem. pacelamie-varti)", widget: string, pattern: ['^[a-z0-9-]+$', 'Tikai mazie latīņu burti, cipari un defise'] }
+      - { name: order, label: Secība sarakstā, widget: number, value_type: int, min: 1, max: 99 }
+      - { name: summary, label: Īss apraksts (parādās sarakstā), widget: text }
+      - { name: image, label: Bilde, widget: image, required: false, hint: "Ja bildes vēl nav, atstājiet tukšu. Lapā parādīsies kārtīgs paziņojums, nevis tukša vieta." }
+      - { name: image_alt, label: "Bildes apraksts (neredzamajiem)", widget: string, required: false }
+      - name: keywords
+        label: Atzīmes zem apraksta
+        label_singular: Atzīme
+        widget: list
+        required: false
+        field: { name: word, label: Vārds, widget: string }
+      - { name: meta_title, label: "Virsraksts meklētājos (līdz 60 zīmēm)", widget: string }
+      - { name: meta_description, label: "Apraksts meklētājos (līdz 155 zīmēm)", widget: text }
+      - { name: body, label: Lapas teksts, widget: markdown }
+
+  # --------------------------------------------------------------------------
+  - name: gallery
+    label: Darbu galerija
+    label_singular: Bilde
+    description: Bildes galerijas lapā un sākumlapā.
+    icon: photo_library
+    folder: src/content/gallery
+    create: true
+    slug: '{{order}}-{{slug}}'
+    sortable_fields: [order]
+    summary: '{{order}}. {{alt}}'
+    fields:
+      - { name: order, label: Secība, widget: number, value_type: int, min: 1, max: 999 }
+      - { name: image, label: Bilde, widget: image }
+      - { name: alt, label: "Bildes apraksts (neredzamajiem un meklētājiem)", widget: string }

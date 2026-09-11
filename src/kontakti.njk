@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Kontakti
+metaTitle: "Kontakti un pieteikums | Vārtu pasaule, Nītaure"
+metaDescription: "Vārtu pasaule, SIA Elks AK. Nītaure, Cēsu novads. Tālrunis +371 29146306. Darba laiks pirmdien-sestdien 8:00-20:00, svētdien 9:00-19:00."
+permalink: /kontakti/
+breadcrumb: true
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Kontakti</span>
+    </nav>
+    <h1 class="phero__h">Kontakti un pieteikums</h1>
+    <p class="phero__p">Zvaniet, rakstiet vai aizpildiet pieteikumu. Norādiet vārtu veidu un aptuveno ailes izmēru, ar to pietiek, lai sagatavotu piedāvājumu.</p>
+  </div>
+</section>
+
+<section class="ask ask--page" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>
+
+<section class="geo" aria-labelledby="geo-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="geo-h">{{ site.geo_headline }}</h2>
+    <p class="s-p reveal" style="--d:60ms">{{ site.geo_intro }}</p>
+    <ul class="geo__list reveal" style="--d:120ms">
+      {% for c in site.geo_core %}<li class="is-core">{{ c.name or c }}</li>{% endfor %}
+      {% for c in site.geo_wider %}<li>{{ c.name or c }}</li>{% endfor %}
+    </ul>
+    <p class="geo__note reveal" style="--d:180ms">{{ site.geo_counts.note }}</p>
+  </div>
+</section>

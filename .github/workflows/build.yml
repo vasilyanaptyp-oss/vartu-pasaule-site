@@ -1,0 +1,62 @@
+name: Build un publicēt
+
+# Katrs saglabājums satura redaktorā izveido commit. Šis process no tā
+# uzbūvē statiskus HTML failus un publicē tos.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # GitHub Pages serves from /<repo>/, so the preview build gets a prefix.
+      - run: npm run build
+        env:
+          PATH_PREFIX: /${{ github.event.repository.name }}/
+
+      # Sanity check: the build must actually produce the pages.
+      - name: Pārbaudīt, vai lapas ir uzbūvētas
+        run: |
+          test -f _site/index.html
+          test -f _site/kontakti/index.html
+          test -f _site/pacelamie-varti/index.html
+          test -f _site/admin/index.html
+          test -f _site/admin/config.yml
+          echo "Uzbūvētas $(find _site -name '*.html' | wc -l) lapas"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # Priekšskatījums GitHub Pages. Kad būs pieejams klienta serveris,
+  # šim blakus nāks otrs solis, kas to pašu _site mapi aizsūta uz hostingu
+  # (skat. .github/workflows/deploy-hosting.yml.disabled).
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

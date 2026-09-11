@@ -1,0 +1,14 @@
+{
+  "name": "vartu-pasaule-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SIA Elks AK / Vartu pasaule - statiska majaslapa",
+  "scripts": {
+    "start": "eleventy --serve --port=8080",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "type": "module"
+}

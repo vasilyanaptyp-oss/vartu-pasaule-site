@@ -1,0 +1,48 @@
+<header class="hdr">
+  <div class="hdr__in">
+    <a class="brand" href="/" aria-label="{{ site.brand }} - uz sākumu">
+      <img class="brand__icon" src="/assets/img/logo-mark.png" width="{{ "/assets/img/logo-mark.png" | imgW }}" height="{{ "/assets/img/logo-mark.png" | imgH }}" alt="" aria-hidden="true">
+      <span class="brand__txt">
+        <span class="brand__mark" role="img" aria-label="Vārtu pasaule"><span class="brand__a" aria-hidden="true">vārtu</span><span class="brand__b" aria-hidden="true">pasaule</span></span>
+        <span class="brand__sub">{{ site.legal_name }} &middot; kopš {{ site.founded_year }}</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Galvenā navigācija">
+      <div class="nav__drop">
+        <a href="/varti/" class="nav__top{% if '/varti/' in page.url or page.gateType %} is-on{% endif %}" aria-haspopup="true">Vārtu veidi</a>
+        <ul class="nav__menu">
+          {% for g in collections.gates %}
+          <li><a href="/{{ g.data.slug }}/">{{ g.data.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <a href="/galerija/"{% if page.url == '/galerija/' %} class="is-on"{% endif %}>Galerija</a>
+      <a href="/par-mums/"{% if page.url == '/par-mums/' %} class="is-on"{% endif %}>Par mums</a>
+      <a href="/kontakti/"{% if page.url == '/kontakti/' %} class="is-on"{% endif %}>Kontakti</a>
+    </nav>
+
+    <div class="hdr__act">
+      <a class="tel" href="{{ site.phones[0].number | telHref }}" aria-label="Zvanīt {{ site.phones[0].number }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>
+        <span class="tel__n">{{ site.phones[0].number }}</span>
+      </a>
+      <a class="btn btn--hi hdr__cta" href="/kontakti/#pieteikums">Pieteikums</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Atvērt izvēlni">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" hidden>
+  <nav class="mnav__in" aria-label="Izvēlne">
+    {% for g in collections.gates %}
+    <a href="/{{ g.data.slug }}/"><b>{{ g.data.title }}</b><i>{% for k in g.data.keywords %}{{ k.word or k }}{% if not loop.last %} &middot; {% endif %}{% endfor %}</i></a>
+    {% endfor %}
+    <a href="/galerija/"><b>Darbu galerija</b><i>Mūsu uzstādītie vārti un durvis</i></a>
+    <a href="/par-mums/"><b>Par mums</b><i>Kopš {{ site.founded_year }}. gada, Nītaure</i></a>
+    <a href="/kontakti/"><b>Kontakti un pieteikums</b><i>{{ site.address.region }}</i></a>
+    <a class="mnav__tel" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>
+  </nav>
+</div>

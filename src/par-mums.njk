@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+title: Par mums
+metaTitle: "Par mums - vārtu ražošana kopš 1992. gada | Vārtu pasaule"
+metaDescription: "SIA Elks AK, zīmols Vārtu pasaule. Reģistrēts Komercreģistrā 1992. gadā. Vārtu un durvju ražošana, uzstādīšana un serviss Nītaurē, Cēsu novadā."
+permalink: /par-mums/
+breadcrumb: true
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Par mums</span>
+    </nav>
+    <h1 class="phero__h">{{ about.title }}</h1>
+    <p class="phero__p">{{ about.intro }}</p>
+  </div>
+</section>
+
+<section class="pbody">
+  <div class="wrap pbody__in">
+    <div class="pbody__txt reveal">
+      {% for p in about.paragraphs %}
+      <p>{{ p.text or p }}</p>
+      {% endfor %}
+    </div>
+    <figure class="pbody__fig reveal" style="--d:80ms">
+      <img src="{{ about.image }}" width="{{ about.image | imgW }}" height="{{ about.image | imgH }}" alt="{{ about.image_alt }}" loading="lazy" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<section class="fakti" aria-label="Uzņēmuma dati">
+  <div class="wrap fakti__in">
+    {% for f in home.facts %}
+    <div class="fakts reveal" style="--d:{{ loop.index0 * 70 }}ms">
+      <p class="fakts__n">
+        {%- if f.count -%}<span class="num" data-to="{{ f.value }}">{{ f.value }}</span>{%- else -%}<span class="yr">{{ f.value }}</span>{%- endif -%}
+        {%- if f.unit %}<i>{{ f.unit }}</i>{% endif -%}
+      </p>
+      <p class="fakts__l">{{ f.label }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="rekv" aria-labelledby="rekv-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="rekv-h">Rekvizīti</h2>
+    <dl class="cts cts--wide reveal" style="--d:60ms">
+      <div><dt>Uzņēmums</dt><dd>{{ site.legal_name }}</dd></div>
+      <div><dt>Zīmols</dt><dd>{{ site.brand }}</dd></div>
+      <div><dt>Reģistrācijas numurs</dt><dd>{{ site.reg_nr }}</dd></div>
+      <div><dt>PVN numurs</dt><dd>{{ site.pvn_nr }}</dd></div>
+      <div><dt>Reģistrēts</dt><dd>{{ site.founded_date_lv }}</dd></div>
+      <div><dt>Juridiskā adrese</dt><dd>{{ site.address.full }}</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="geo" aria-labelledby="geo-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="geo-h">{{ site.geo_headline }}</h2>
+    <p class="s-p reveal" style="--d:60ms">{{ site.geo_intro }}</p>
+    <ul class="geo__list reveal" style="--d:120ms">
+      {% for c in site.geo_core %}<li class="is-core">{{ c.name or c }}</li>{% endfor %}
+      {% for c in site.geo_wider %}<li>{{ c.name or c }}</li>{% endfor %}
+    </ul>
+    <p class="geo__note reveal" style="--d:180ms">{{ site.geo_counts.note }}</p>
+  </div>
+</section>
+
+<section class="ask" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>

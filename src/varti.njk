@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+title: Vārtu veidi
+metaTitle: "Vārtu veidi - paceļamie, bīdāmie, industriālie | Vārtu pasaule"
+metaDescription: "Visi vārtu veidi, ko ražojam un uzstādām: paceļamie un sekciju vārti, bīdāmie vārti un barjeras, industriālie vārti, automātika, durvis un serviss."
+permalink: /varti/
+breadcrumb: true
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Vārtu veidi</span>
+    </nav>
+    <h1 class="phero__h">Vārtu veidi</h1>
+    <p class="phero__p">{{ home.types_text }}</p>
+  </div>
+</section>
+
+<section class="veidi veidi--page">
+  <div class="wrap">
+    <div class="tiles">
+      {% for g in collections.gates %}
+      <article class="tile{% if not g.data.image %} tile--txt{% endif %} reveal" style="--d:{{ loop.index0 * 70 }}ms">
+        {% if g.data.image %}
+        <figure class="tile__img">
+          <img src="{{ g.data.image }}" width="{{ g.data.image | imgW }}" height="{{ g.data.image | imgH }}" alt="" loading="lazy" decoding="async">
+        </figure>
+        {% endif %}
+        <div class="tile__b">
+          <h2 class="tile__t"><a class="tile__link" href="/{{ g.data.slug }}/">{{ g.data.title }}</a></h2>
+          <p class="tile__d">{{ g.data.summary }}</p>
+          {% if g.data.keywords %}
+          <ul class="tile__k">
+            {% for k in g.data.keywords %}<li>{{ k.word or k }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+          <a class="btn btn--sm tile__cta" href="/kontakti/#pieteikums" data-veids="{{ g.data.title }}">Pieteikums šim veidam<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ask" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>

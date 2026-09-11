@@ -1,0 +1,123 @@
+---
+layout: layouts/base.njk
+title: Sākums
+metaTitle: "Vārtu pasaule - garāžas, paceļamie un bīdāmie vārti Cēsu novadā"
+metaDescription: "SIA Elks AK: paceļamie un sekciju vārti, bīdāmie vārti, industriālie vārti, automātika un durvis. Ražojam un uzstādām kopš 1992. gada. Cēsis, Valmiera, Sigulda, Rīga, visa Vidzeme."
+permalink: /
+---
+
+<section class="hero">
+  <div class="wrap hero__in">
+    <div class="hero__txt">
+      <h1 class="hero__h">
+        <span class="ln">{{ home.hero_title_line1 }}</span>
+        <span class="ln">{{ home.hero_title_line2 }}</span>
+      </h1>
+      <p class="hero__p">{{ home.hero_text }}</p>
+      <div class="hero__cta">
+        <a class="btn btn--hi btn--lg" href="/kontakti/#pieteikums">{{ home.hero_cta }}<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a>
+        <a class="btn btn--gh btn--lg btn--tel" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>
+      </div>
+    </div>
+    <figure class="hero__fig">
+      <img src="{{ home.hero_image }}" width="{{ home.hero_image | imgW }}" height="{{ home.hero_image | imgH }}" alt="{{ home.hero_image_alt }}" fetchpriority="high" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<section class="veidi" id="veidi" aria-labelledby="veidi-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="veidi-h">{{ home.types_title }}</h2>
+    <p class="s-p reveal" style="--d:60ms">{{ home.types_text }}</p>
+
+    <div class="tiles">
+      {% for g in collections.gates %}
+      <article class="tile{% if not g.data.image %} tile--txt{% endif %} reveal" style="--d:{{ loop.index0 * 70 }}ms">
+        {% if g.data.image %}
+        <figure class="tile__img">
+          <img src="{{ g.data.image }}" width="{{ g.data.image | imgW }}" height="{{ g.data.image | imgH }}" alt="" loading="lazy" decoding="async">
+        </figure>
+        {% endif %}
+        <div class="tile__b">
+          <h3 class="tile__t"><a class="tile__link" href="/{{ g.data.slug }}/">{{ g.data.title }}</a></h3>
+          <p class="tile__d">{{ g.data.summary }}</p>
+          {% if g.data.keywords %}
+          <ul class="tile__k">
+            {% for k in g.data.keywords %}<li>{{ k.word or k }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+          <a class="btn btn--sm tile__cta" href="/kontakti/#pieteikums" data-veids="{{ g.data.title }}">Pieteikums šim veidam<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="komp" id="komplektacija" aria-labelledby="komp-h">
+  <div class="wrap komp__in">
+    <figure class="komp__fig reveal">
+      <img src="{{ home.komp_image }}" width="{{ home.komp_image | imgW }}" height="{{ home.komp_image | imgH }}" alt="{{ home.komp_image_alt }}" loading="lazy" decoding="async">
+    </figure>
+    <div class="komp__txt">
+      <h2 class="s-h reveal" id="komp-h">{{ home.komp_title }}</h2>
+      <p class="s-p reveal" style="--d:60ms">{{ home.komp_text }}</p>
+      <ul class="chips reveal" style="--d:120ms">
+        {% for k in home.komp_items %}<li>{{ k.item or k }}</li>{% endfor %}
+      </ul>
+      <p class="komp__ral reveal" style="--d:180ms">
+        <span class="komp__swatches" aria-hidden="true"><i style="--c:#8E9196"></i><i style="--c:#3B4248"></i><i style="--c:#6B4A2B"></i><i style="--c:#8C6239"></i><i style="--c:#E7E3DA"></i><i style="--c:#7A2E2E"></i></span>
+        {{ home.komp_ral }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="fakti" aria-label="Uzņēmuma dati">
+  <div class="wrap fakti__in">
+    {% for f in home.facts %}
+    <div class="fakts reveal" style="--d:{{ loop.index0 * 70 }}ms">
+      <p class="fakts__n">
+        {%- if f.count -%}<span class="num" data-to="{{ f.value }}">{{ f.value }}</span>{%- else -%}<span class="yr">{{ f.value }}</span>{%- endif -%}
+        {%- if f.unit %}<i>{{ f.unit }}</i>{% endif -%}
+      </p>
+      <p class="fakts__l">{{ f.label }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="geo" aria-labelledby="geo-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="geo-h">{{ site.geo_headline }}</h2>
+    <p class="s-p reveal" style="--d:60ms">{{ site.geo_intro }}</p>
+    <ul class="geo__list reveal" style="--d:120ms">
+      {% for c in site.geo_core %}<li class="is-core">{{ c.name or c }}</li>{% endfor %}
+      {% for c in site.geo_wider %}<li>{{ c.name or c }}</li>{% endfor %}
+    </ul>
+    <p class="geo__note reveal" style="--d:180ms">{{ site.geo_counts.note }}</p>
+  </div>
+</section>
+
+<section class="gal" id="galerija" aria-labelledby="gal-h">
+  <div class="wrap">
+    <h2 class="s-h reveal" id="gal-h">{{ home.gallery_title }}</h2>
+    <p class="s-p reveal" style="--d:60ms">{{ home.gallery_text }}</p>
+  </div>
+  <div class="wrap">
+    <ul class="gal__grid">
+      {% set shown = collections.gallery.slice(0, 8) %}
+      {% for g in shown %}
+      <li class="reveal" style="--d:{{ loop.index0 * 40 }}ms"><img src="{{ g.data.image }}" width="{{ g.data.image | imgW }}" height="{{ g.data.image | imgH }}" alt="{{ g.data.alt }}" loading="lazy" decoding="async"></li>
+      {% endfor %}
+    </ul>
+    <p class="gal__more reveal"><a class="btn btn--gh" href="/galerija/">Visa galerija<i class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></i></a></p>
+  </div>
+</section>
+
+<section class="ask" id="pieteikums" aria-labelledby="ask-h">
+  <div class="wrap ask__in">
+    {% include "partials/form.njk" %}
+    {% include "partials/contacts.njk" %}
+  </div>
+</section>

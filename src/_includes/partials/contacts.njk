@@ -1,0 +1,19 @@
+<aside class="ask__c" id="kontakti" aria-labelledby="c-h">
+  <h2 class="s-h reveal" id="c-h">Kontakti</h2>
+  <dl class="cts reveal" style="--d:60ms">
+    <div><dt>Adrese</dt><dd>{{ site.address.full }}</dd></div>
+    {% for p in site.phones %}
+    <div><dt>Tālrunis</dt><dd><a class="lnk" href="{{ p.number | telHref }}">{{ p.number }}</a></dd></div>
+    {% endfor %}
+    <div><dt>E-pasts</dt><dd><a class="lnk" href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
+  </dl>
+
+  <div class="hours reveal" style="--d:120ms">
+    <h3 class="hours__h">Darba laiks</h3>
+    <ul class="hours__l">
+      {% for h in site.hours %}
+      <li><span>{{ h.day }}</span><b>{{ h.open }}&nbsp;-&nbsp;{{ h.close }}</b></li>
+      {% endfor %}
+    </ul>
+  </div>
+</aside>

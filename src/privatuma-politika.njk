@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Privātuma politika
+metaTitle: "Privātuma politika | Vārtu pasaule"
+metaDescription: "Kā SIA Elks AK apstrādā pieteikuma formā norādītos datus."
+permalink: /privatuma-politika/
+noindex: true
+breadcrumb: true
+---
+
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Navigācijas ceļš">
+      <a href="/">Sākums</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Privātuma politika</span>
+    </nav>
+    <h1 class="phero__h">Privātuma politika</h1>
+    <p class="phero__p">Šajā lapā ir aprakstīts, kādus datus saņemam no pieteikuma formas un ko ar tiem darām.</p>
+  </div>
+</section>
+
+<section class="prose">
+  <div class="wrap prose__in reveal">
+    <h2>Kas apstrādā datus</h2>
+    <p>{{ site.legal_name }}, reģistrācijas numurs {{ site.reg_nr }}, adrese {{ site.address.full }}. Saziņai: <a class="lnk lnk--inline" href="mailto:{{ site.email }}">{{ site.email }}</a>, <a class="lnk lnk--inline" href="{{ site.phones[0].number | telHref }}">{{ site.phones[0].number }}</a>.</p>
+
+    <h2>Kādus datus saņemam</h2>
+    <p>Tikai tos, ko pats ierakstāt pieteikuma formā: vārds, tālrunis, pēc izvēles e-pasts, vārtu veids, ailes izmērs un piezīmes.</p>
+
+    <h2>Kāpēc tos izmantojam</h2>
+    <p>Lai atbildētu uz jūsu pieteikumu un sagatavotu piedāvājumu. Citiem mērķiem datus neizmantojam. Reklāmas sūtījumus nesūtām.</p>
+
+    <h2>Cik ilgi glabājam</h2>
+    <p>Pieteikumu glabājam tik ilgi, cik nepieciešams sarunai un darījumam. Ja darījums nenotiek, pieteikumu dzēšam.</p>
+
+    <h2>Kam nododam</h2>
+    <p>Nevienam. Datus nepārdodam un nenododam trešajām personām reklāmas nolūkos.</p>
+
+    <h2>Jūsu tiesības</h2>
+    <p>Varat jebkurā brīdī pieprasīt, lai parādām, labojam vai dzēšam jūsu datus. Rakstiet uz <a class="lnk lnk--inline" href="mailto:{{ site.email }}">{{ site.email }}</a>. Ja uzskatāt, ka dati apstrādāti nepareizi, varat vērsties Datu valsts inspekcijā.</p>
+
+    <h2>Sīkdatnes</h2>
+    <p>Šī lapa neizmanto sīkdatnes analītikai vai reklāmai un neievieto trešo pušu izsekošanas skriptus.</p>
+  </div>
+</section>

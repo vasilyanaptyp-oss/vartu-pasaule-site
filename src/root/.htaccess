@@ -1,0 +1,70 @@
+# ============================================================================
+# Vārtu pasaule - Apache konfigurācija.
+# Tikai statiski faili. Nekāda PHP, nekādas datubāzes.
+# ============================================================================
+
+# --- Kļūdu lapa -------------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Kodējums ---------------------------------------------------------------
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType text/javascript .mjs
+</IfModule>
+
+# --- HTTPS ------------------------------------------------------------------
+# Ieslēgt TIKAI pēc tam, kad domēnam vartupasaule.lv ir derīgs sertifikāts.
+# Ja ieslēgs agrāk, apmeklētāji redzēs brīdinājumu par nedrošu savienojumu.
+#<IfModule mod_rewrite.c>
+#  RewriteEngine On
+#  RewriteCond %{HTTPS} !=on
+#  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#</IfModule>
+
+# --- Bez www ----------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# --- Drošības galvenes ------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # HSTS pievienot tikai tad, kad HTTPS strādā stabili:
+  # Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# --- Kešošana ---------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 10 minutes"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# --- Saspiešana -------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript text/javascript
+  AddOutputFilterByType DEFLATE image/svg+xml application/json
+</IfModule>
+
+# --- Direktoriju saraksts izslēgts ------------------------------------------
+Options -Indexes
+
+# --- Slēptie faili ----------------------------------------------------------
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
