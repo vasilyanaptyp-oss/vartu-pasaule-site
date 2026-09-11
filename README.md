@@ -10,6 +10,7 @@ Uz servera nonāk tikai HTML, CSS, JS un attēli.
 
 - [PAMACIBA.md](PAMACIBA.md) - kā labot saturu (klientam)
 - [UZSTADISANA.md](UZSTADISANA.md) - uzstādīšana, nodošana, serveris (tehniski)
+- [VAJADZIGAS-BILDES.md](VAJADZIGAS-BILDES.md) - kādas bildes vēl vajag no klienta
 
 ## Tehniski
 
